@@ -27,7 +27,6 @@ class _MainDisplayState extends State<MainDisplay> {
         children: [HomeScreen(), HomeScreen(), HomeScreen(), HomeScreen()],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        
         backgroundColor: Colors.black,
         unselectedItemColor: Colors.white,
         selectedItemColor: ColorsToUse().unitedRed,
@@ -37,8 +36,8 @@ class _MainDisplayState extends State<MainDisplay> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.number_square),
-            label: 'LeaderBoard',
+            icon: Icon(CupertinoIcons.chart_bar),
+            label: 'Stats',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
