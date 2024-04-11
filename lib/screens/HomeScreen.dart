@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manunited_trivia/constants/ColorsToUse.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -15,29 +16,44 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
         child: Scaffold(
       body: Container(
-        height: ScreenSize.screenHeight,
-        width: ScreenSize.screenWidth,
-        child: Column(children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 0.06 * ScreenSize.screenHeight,
-              // decoration: BoxDecoration(border: Border.all(color: Colors.red)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(Icons.menu),
-                  Text(
-                    "Hello , Red Devil",
-                    style: TextStyle(color: Colors.red),
+          height: ScreenSize.screenHeight,
+          width: ScreenSize.screenWidth,
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
                   ),
-                  Icon(Icons.settings)
-                ],
+                ),
+                height: 0.12 * ScreenSize.screenHeight,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Good Morning',
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontFamily: "Gabarito"),
+                      ),
+                      Text("Red Devil",
+                          style: TextStyle(
+                              fontSize: 30,
+                              fontFamily: "Gabarito",
+                              color: ColorsToUse().unitedRed,
+                              // color: Colors.black,
+                              fontWeight: FontWeight.bold))
+                    ],
+                  ),
+                ),
               ),
-            ),
-          )
-        ]),
-      ),
+            ],
+          )),
     ));
   }
 }

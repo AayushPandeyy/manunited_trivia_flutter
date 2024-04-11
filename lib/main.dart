@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/RouteNames.dart';
 import 'package:manunited_trivia/screens/HomeScreen.dart';
+import 'package:manunited_trivia/screens/MainDisplay.dart';
 import 'package:manunited_trivia/screens/SplashScreen.dart';
 
 void main() {
@@ -35,8 +36,10 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SplashScreen(),
+      debugShowCheckedModeBanner: false,
       routes: {
-        RouteNames().homeRoute : (context) => const HomeScreen(),
+        RouteNames().homeRoute: (context) => const HomeScreen(),
+        RouteNames().mainRoute: (context) => const MainDisplay(),
       },
     );
   }
