@@ -1,4 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:manunited_trivia/constants/CarouselItems.dart';
 import 'package:manunited_trivia/constants/ColorsToUse.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
 import 'package:manunited_trivia/widgets/PointsWidget.dart';
@@ -60,7 +62,17 @@ class _HomeScreenState extends State<HomeScreen> {
             SizedBox(
               height: 20,
             ),
-            QuizBox()
+            CarouselSlider(
+                items: CarouselItems().items1,
+                options: CarouselOptions(
+                  height: ScreenSize.screenHeight * 0.2,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  reverse: false,
+                  enlargeCenterPage: true,
+                  enlargeFactor: 0.3,
+                  scrollDirection: Axis.horizontal,
+                ))
           ])),
     ));
   }
