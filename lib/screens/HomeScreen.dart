@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/CarouselItems.dart';
 import 'package:manunited_trivia/constants/ColorsToUse.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
+import 'package:manunited_trivia/widgets/AchievementsWidget.dart';
+import 'package:manunited_trivia/widgets/AverageScoreWidget.dart';
 import 'package:manunited_trivia/widgets/PointsWidget.dart';
 import 'package:manunited_trivia/widgets/QuizBox.dart';
 
@@ -19,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ScreenSize().init(context: context);
     return SafeArea(
         child: Scaffold(
-      body: Container(
+      body: SizedBox(
           height: ScreenSize.screenHeight,
           width: ScreenSize.screenWidth,
           child: Column(children: [
@@ -55,12 +57,21 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            PointsBox(),
-            SizedBox(
+            const PointsBox(),
+            const SizedBox(
               height: 20,
+            ),
+            const Center(
+              child: Text(
+                "Avaiable Quizzes",
+                style: TextStyle(fontFamily: "AldotheApache", fontSize: 30),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
             ),
             CarouselSlider(
                 items: CarouselItems().items1,
@@ -72,7 +83,24 @@ class _HomeScreenState extends State<HomeScreen> {
                   enlargeCenterPage: true,
                   enlargeFactor: 0.3,
                   scrollDirection: Axis.horizontal,
-                ))
+                )),
+            const SizedBox(
+              height: 10,
+            ),
+            const Center(
+              child: Text(
+                "Your Performance",
+                style: TextStyle(fontFamily: "AldotheApache", fontSize: 30),
+              ),
+            ),
+            const SizedBox(
+              height: 5,
+            ),
+            const AverageScoreWidget(),
+            const SizedBox(
+              height: 10,
+            ),
+            const AchievementsWidget()
           ])),
     ));
   }

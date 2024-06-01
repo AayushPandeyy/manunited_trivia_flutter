@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/ColorsToUse.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
+import 'package:manunited_trivia/widgets/AverageScoreWidget.dart';
 import 'package:manunited_trivia/widgets/StatsBox.dart';
 
 class StatsScreen extends StatefulWidget {
@@ -49,7 +50,7 @@ class _StatsScreenState extends State<StatsScreen> {
                 height: 20,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   StatsBox(
                     icon: Icons.timelapse,
@@ -69,7 +70,7 @@ class _StatsScreenState extends State<StatsScreen> {
                 height: 20,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   const StatsBox(
                     icon: Icons.close_outlined,
@@ -85,6 +86,10 @@ class _StatsScreenState extends State<StatsScreen> {
                   )
                 ],
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              const AverageScoreWidget()
             ],
           ),
         ),
