@@ -7,7 +7,6 @@ class AchievementsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     ScreenSize().init(context: context);
     return Container(
       height: ScreenSize.screenHeight * 0.12,

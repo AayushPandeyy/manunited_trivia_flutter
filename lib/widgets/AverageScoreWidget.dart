@@ -11,7 +11,7 @@ class AverageScoreWidget extends StatelessWidget {
       height: ScreenSize.screenHeight * 0.12,
       width: ScreenSize.screenWidth * 0.9,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20), color: Colors.yellow[700]),
+          borderRadius: BorderRadius.circular(20), color: Colors.black),
       child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -21,6 +21,7 @@ class AverageScoreWidget extends StatelessWidget {
               Icon(
                 Icons.emoji_events,
                 size: 60,
+                color: Colors.white,
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -30,6 +31,7 @@ class AverageScoreWidget extends StatelessWidget {
                     "Average Score",
                     style: TextStyle(
                         fontFamily: "Gabarito",
+                        color: Colors.white,
                         fontSize: 30,
                         fontWeight: FontWeight.bold),
                   ),
@@ -38,6 +40,7 @@ class AverageScoreWidget extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: "Gabarito",
                       fontSize: 15,
+                      color: Colors.white,
                     ),
                   ),
                 ],
@@ -49,6 +52,7 @@ class AverageScoreWidget extends StatelessWidget {
             style: TextStyle(
                 fontFamily: "AldotheApache",
                 fontSize: 35,
+                color: Colors.white,
                 fontWeight: FontWeight.bold),
           )
         ],
