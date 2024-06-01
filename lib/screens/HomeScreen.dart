@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
           width: ScreenSize.screenWidth,
           child: Column(children: [
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(20),
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Good Morning',
                       style: TextStyle(
                           color: Colors.white,
@@ -46,11 +46,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Text("Red Devil",
                         style: TextStyle(
-                            fontSize: 30,
-                            fontFamily: "Gabarito",
-                            color: ColorsToUse().unitedRed,
-                            // color: Colors.black,
-                            fontWeight: FontWeight.bold))
+                          fontSize: 30,
+                          fontFamily: "AldotheApache",
+                          color: ColorsToUse().unitedRed,
+                          // color: Colors.black,
+                        ))
                   ],
                 ),
               ),

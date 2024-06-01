@@ -80,6 +80,9 @@ flutter:
     - family: Gabarito
       fonts:
         - asset: fonts/Gabarito-VariableFont_wght.ttf
+    - family: AldotheApache
+      fonts:
+        - asset: fonts/AldotheApache.ttf
 
   #
   # For details regarding fonts from package dependencies,

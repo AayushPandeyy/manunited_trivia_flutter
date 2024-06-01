@@ -66,7 +66,7 @@ class QuizBox extends StatelessWidget {
                       border: Border.all(color: Colors.black, width: 2)),
                   child: TextButton(
                     onPressed: () {},
-                    child: Text(
+                    child: const Text(
                       "Join the quiz",
                       style: TextStyle(
                           fontFamily: "Gabarito",

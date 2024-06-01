@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/ColorsToUse.dart';
 import 'package:manunited_trivia/screens/HomeScreen.dart';
+import 'package:manunited_trivia/screens/StatsScreen.dart';
 
 class MainDisplay extends StatefulWidget {
   const MainDisplay({super.key});
@@ -24,7 +25,7 @@ class _MainDisplayState extends State<MainDisplay> {
     return Scaffold(
       body: IndexedStack(
         index: _selectedIndex,
-        children: [HomeScreen(), HomeScreen(), HomeScreen(), HomeScreen()],
+        children: [HomeScreen(), StatsScreen(), HomeScreen(), HomeScreen()],
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.black,
