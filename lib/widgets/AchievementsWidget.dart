@@ -58,3 +58,4 @@ class AchievementsWidget extends StatelessWidget {
     );
   }
 }
+

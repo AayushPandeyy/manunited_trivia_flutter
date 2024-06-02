@@ -1,3 +1,4 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/ColorsToUse.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
@@ -89,7 +90,9 @@ class _StatsScreenState extends State<StatsScreen> {
               const SizedBox(
                 height: 20,
               ),
-              const AverageScoreWidget()
+              const AverageScoreWidget(),
+              const SizedBox(height: 15,),
+              
             ],
           ),
         ),

@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/ColorsToUse.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
+import 'package:manunited_trivia/screens/QuizScreen.dart';
 
 class QuizBox extends StatelessWidget {
   final String title;
@@ -65,7 +66,10 @@ class QuizBox extends StatelessWidget {
                       borderRadius: BorderRadius.circular(30),
                       border: Border.all(color: Colors.black, width: 2)),
                   child: TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const QuizScreen()));
+                    },
                     child: const Text(
                       "Join the quiz",
                       style: TextStyle(
