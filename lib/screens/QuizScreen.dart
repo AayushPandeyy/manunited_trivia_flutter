@@ -73,8 +73,7 @@ class _QuizScreenState extends State<QuizScreen> {
               const SizedBox(
                 height: 15,
               ),
-              
-              Expanded(child: CorrectAnswer())
+              const CorrectAnswer()
             ],
           )),
     ));

@@ -1,6 +1,6 @@
 // ignore: file_names
 class Questions {
-   static List<Map<String, dynamic>> quizQuestions = [
+  static List<Map<String, dynamic>> quizQuestions = [
     {
       'question': 'Who is Manchester United\'s all-time leading goal scorer?',
       'options': [
@@ -103,4 +103,7 @@ class Questions {
   // Create a list of questions only
   List<String> questionsOnly =
       quizQuestions.map((quiz) => quiz['question'] as String).toList();
+
+  List<List<String>> options =
+      quizQuestions.map((quiz) => quiz['options'] as List<String>).toList();
 }
