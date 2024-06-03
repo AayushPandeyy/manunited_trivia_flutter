@@ -1,12 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:manunited_trivia/constants/ColorsToUse.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
-import 'package:manunited_trivia/widgets/AnswerBox.dart';
 import 'package:manunited_trivia/widgets/CorrectAnswerWidget.dart';
 import 'package:manunited_trivia/widgets/NumberWidget.dart';
-import 'package:manunited_trivia/widgets/QuestionBox.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -27,7 +24,7 @@ class _QuizScreenState extends State<QuizScreen> {
     return SafeArea(
         child: Scaffold(
       body: Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/images/quizbg.jpg"),
                   fit: BoxFit.cover)),
@@ -45,7 +42,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   ),
                   height: 0.12 * ScreenSize.screenHeight,
                   width: ScreenSize.screenWidth * 0.3,
-                  child: Center(
+                  child: const Center(
                     child: AutoSizeText(
                       "Historical Quiz",
                       style: TextStyle(

@@ -12,9 +12,9 @@ class CorrectAnswer extends StatefulWidget {
 }
 
 class _CorrectAnswerState extends State<CorrectAnswer> {
-  int correctAnswerIndex = 1;
   int selectedAnswer = 0;
-  int quesIndex = 0;
+  static int quesIndex = 0;
+  int correctAnswerIndex = Questions().correctAnswerIndexes[quesIndex];
 
   Future<void> displayAlert(BuildContext context, String message) {
     return showDialog<String>(
@@ -27,6 +27,8 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
                       Navigator.of(context).pop();
                       setState(() {
                         quesIndex = quesIndex + 1;
+                        correctAnswerIndex =
+                            Questions().correctAnswerIndexes[quesIndex];
                         colors = [
                           Colors.black,
                           Colors.black,
@@ -77,7 +79,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
                 GestureDetector(
                   onTap: () => changeColor(index),
                   child: AnswerBox(
-                    data: Questions().options[index][index],
+                    data: Questions().optionsOnly[quesIndex][index],
                     color: colors[index],
                   ),
                 ),

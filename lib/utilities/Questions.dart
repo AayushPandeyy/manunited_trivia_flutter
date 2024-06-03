@@ -104,6 +104,12 @@ class Questions {
   List<String> questionsOnly =
       quizQuestions.map((quiz) => quiz['question'] as String).toList();
 
-  List<List<String>> options =
+  List<List<String>> optionsOnly =
       quizQuestions.map((quiz) => quiz['options'] as List<String>).toList();
+
+  List<int> correctAnswerIndexes = quizQuestions.map((quiz) {
+    List<String> options = quiz['options'];
+    String answer = quiz['answer'];
+    return options.indexOf(answer);
+  }).toList();
 }
