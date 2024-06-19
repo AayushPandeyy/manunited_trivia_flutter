@@ -1,9 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
 import 'package:manunited_trivia/widgets/CorrectAnswerWidget.dart';
-import 'package:manunited_trivia/widgets/NumberWidget.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -13,13 +11,8 @@ class QuizScreen extends StatefulWidget {
 }
 
 class _QuizScreenState extends State<QuizScreen> {
-  final List<Widget> numberList = [];
-
   @override
   Widget build(BuildContext context) {
-    for (var i = 1; i <= 10; i++) {
-      numberList.add(NumberWidget(data: i));
-    }
     ScreenSize().init(context: context);
     return SafeArea(
         child: Scaffold(
@@ -54,21 +47,6 @@ class _QuizScreenState extends State<QuizScreen> {
                   )),
               const SizedBox(
                 height: 20,
-              ),
-              CarouselSlider(
-                  items: numberList,
-                  options: CarouselOptions(
-                    height: 70,
-                    aspectRatio: 16 / 9,
-                    viewportFraction: 0.8,
-                    enableInfiniteScroll: false,
-                    reverse: false,
-                    enlargeCenterPage: true,
-                    enlargeFactor: 0.5,
-                    scrollDirection: Axis.horizontal,
-                  )),
-              const SizedBox(
-                height: 15,
               ),
               const CorrectAnswer()
             ],

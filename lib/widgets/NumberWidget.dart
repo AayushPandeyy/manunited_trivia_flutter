@@ -16,7 +16,7 @@ class NumberWidget extends StatelessWidget {
       child: Center(
         child: Text(
           "$data",
-          style: TextStyle(fontFamily: "AldotheApache", fontSize: 60),
+          style: const TextStyle(fontFamily: "AldotheApache", fontSize: 60),
         ),
       ),
     );
