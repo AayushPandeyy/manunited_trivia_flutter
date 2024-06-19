@@ -1,11 +1,15 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/screens/HomeScreen.dart';
+import 'package:manunited_trivia/screens/ResultScreen.dart';
 import 'package:manunited_trivia/utilities/PopupDialog.dart';
 import 'package:manunited_trivia/utilities/Questions.dart';
 import 'package:manunited_trivia/widgets/AnswerBox.dart';
 import 'package:manunited_trivia/widgets/NumberWidget.dart';
 import 'package:manunited_trivia/widgets/QuestionBox.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class CorrectAnswer extends StatefulWidget {
   const CorrectAnswer({super.key});
@@ -16,47 +20,21 @@ class CorrectAnswer extends StatefulWidget {
 
 class _CorrectAnswerState extends State<CorrectAnswer> {
   int selectedAnswer = 0;
+  int points = 0;
+  int incorrectAns = 0;
   static int quesIndex = 0;
   int correctAnswerIndex = Questions().correctAnswerIndexes[quesIndex];
   int size = Questions().questionsOnly.length;
   final CarouselController _controller = CarouselController();
+  void reset() {
+    setState(() {
+      points = 0;
+      incorrectAns = 0;
+      quesIndex = 0;
+    });
+  }
 
   final List<Widget> numberList = [];
-
-  Future<void> displayAlert(BuildContext context, String message) {
-    return showDialog<String>(
-        context: context,
-        builder: ((context) => AlertDialog(
-              title: Text(message),
-              actions: [
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      setState(() {
-                        if (quesIndex < size - 1) {
-                          quesIndex = quesIndex + 1;
-                          correctAnswerIndex =
-                              Questions().correctAnswerIndexes[quesIndex];
-                          colors = [
-                            Colors.black,
-                            Colors.black,
-                            Colors.black,
-                            Colors.black
-                          ];
-                          _controller.nextPage();
-                        } else {
-                          Navigator.pop(context);
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomeScreen()));
-                        }
-                      });
-                    },
-                    child: const Text("Next Question"))
-              ],
-            )));
-  }
 
   List<Color> colors = [Colors.black, Colors.black, Colors.black, Colors.black];
 
@@ -66,10 +44,81 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
       if (index != correctAnswerIndex) {
         colors[correctAnswerIndex] = Colors.green;
         colors[index] = Colors.red;
-        displayAlert(context, "Wrong Answer!");
+        QuickAlert.show(
+          context: context,
+          type: QuickAlertType.error,
+          text: Questions().infoOnly[quesIndex],
+          confirmBtnText: "Next Question",
+          title: "Incorrect Answer",
+          onConfirmBtnTap: () {
+            Navigator.of(context).pop();
+            setState(() {
+              if (quesIndex < size - 1) {
+                quesIndex = quesIndex + 1;
+                correctAnswerIndex =
+                    Questions().correctAnswerIndexes[quesIndex];
+                colors = [
+                  Colors.black,
+                  Colors.black,
+                  Colors.black,
+                  Colors.black
+                ];
+                _controller.nextPage();
+              } else {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ResultScreen(
+                              totalQues: size,
+                              incorrectAns: incorrectAns,
+                              correctAns: size - incorrectAns,
+                              totalPoints: points,
+                            )));
+                reset();
+              }
+            });
+          },
+        );
+        incorrectAns++;
       } else {
         colors[correctAnswerIndex] = Colors.green;
-        displayAlert(context, "Correct Answer!");
+        QuickAlert.show(
+          context: context,
+          type: QuickAlertType.success,
+          text: Questions().infoOnly[quesIndex],
+          confirmBtnText: "Next Question",
+          title: "Correct Answer",
+          onConfirmBtnTap: () {
+            Navigator.of(context).pop();
+            setState(() {
+              if (quesIndex < size - 1) {
+                quesIndex = quesIndex + 1;
+                correctAnswerIndex =
+                    Questions().correctAnswerIndexes[quesIndex];
+                colors = [
+                  Colors.black,
+                  Colors.black,
+                  Colors.black,
+                  Colors.black
+                ];
+                _controller.nextPage();
+              } else {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ResultScreen(
+                              totalQues: size,
+                              incorrectAns: incorrectAns,
+                              correctAns: size - incorrectAns,
+                              totalPoints: points,
+                            )));
+              }
+            });
+          },
+        );
+        points = points + Questions().pointsOnly[quesIndex];
       }
     });
   }
@@ -101,7 +150,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
         ),
         QuestionBox(
           question: Questions().questionsOnly[quesIndex],
-          points: 10,
+          points: Questions().pointsOnly[quesIndex],
         ),
         const SizedBox(
           height: 20,
