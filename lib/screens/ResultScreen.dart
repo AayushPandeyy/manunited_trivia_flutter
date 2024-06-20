@@ -226,7 +226,7 @@ class _ResultScreenState extends State<ResultScreen> {
                           builder: (context) => const QuizScreen()));
                     },
                     child: const Text(
-                      "See Incorrect Answers",
+                      "Retake Quiz",
                       style: TextStyle(
                           fontFamily: "Gabarito",
                           fontSize: 18,

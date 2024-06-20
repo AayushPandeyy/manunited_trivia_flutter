@@ -1,10 +1,9 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
+import 'dart:math';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:manunited_trivia/screens/HomeScreen.dart';
 import 'package:manunited_trivia/screens/ResultScreen.dart';
-import 'package:manunited_trivia/utilities/PopupDialog.dart';
-import 'package:manunited_trivia/utilities/Questions.dart';
+import 'package:manunited_trivia/utilities/GeneralKnowledgeQuestions.dart';
 import 'package:manunited_trivia/widgets/AnswerBox.dart';
 import 'package:manunited_trivia/widgets/NumberWidget.dart';
 import 'package:manunited_trivia/widgets/QuestionBox.dart';
@@ -19,12 +18,17 @@ class CorrectAnswer extends StatefulWidget {
 }
 
 class _CorrectAnswerState extends State<CorrectAnswer> {
+  static Random random = Random();
+
   int selectedAnswer = 0;
+
   int points = 0;
   int incorrectAns = 0;
   static int quesIndex = 0;
-  int correctAnswerIndex = Questions().correctAnswerIndexes[quesIndex];
-  int size = Questions().questionsOnly.length;
+  int correctAnswerIndex =
+      GeneralKnowledgeQuestions().correctAnswerIndexes[quesIndex];
+  int size = GeneralKnowledgeQuestions().questionsOnly.length;
+
   final CarouselController _controller = CarouselController();
   void reset() {
     setState(() {
@@ -47,7 +51,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
         QuickAlert.show(
           context: context,
           type: QuickAlertType.error,
-          text: Questions().infoOnly[quesIndex],
+          text: GeneralKnowledgeQuestions().infoOnly[quesIndex],
           confirmBtnText: "Next Question",
           title: "Incorrect Answer",
           onConfirmBtnTap: () {
@@ -56,7 +60,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
               if (quesIndex < size - 1) {
                 quesIndex = quesIndex + 1;
                 correctAnswerIndex =
-                    Questions().correctAnswerIndexes[quesIndex];
+                    GeneralKnowledgeQuestions().correctAnswerIndexes[quesIndex];
                 colors = [
                   Colors.black,
                   Colors.black,
@@ -86,7 +90,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
         QuickAlert.show(
           context: context,
           type: QuickAlertType.success,
-          text: Questions().infoOnly[quesIndex],
+          text: GeneralKnowledgeQuestions().infoOnly[quesIndex],
           confirmBtnText: "Next Question",
           title: "Correct Answer",
           onConfirmBtnTap: () {
@@ -95,7 +99,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
               if (quesIndex < size - 1) {
                 quesIndex = quesIndex + 1;
                 correctAnswerIndex =
-                    Questions().correctAnswerIndexes[quesIndex];
+                    GeneralKnowledgeQuestions().correctAnswerIndexes[quesIndex];
                 colors = [
                   Colors.black,
                   Colors.black,
@@ -118,7 +122,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
             });
           },
         );
-        points = points + Questions().pointsOnly[quesIndex];
+        points = points + GeneralKnowledgeQuestions().pointsOnly[quesIndex];
       }
     });
   }
@@ -149,8 +153,8 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
           height: 20,
         ),
         QuestionBox(
-          question: Questions().questionsOnly[quesIndex],
-          points: Questions().pointsOnly[quesIndex],
+          question: GeneralKnowledgeQuestions().questionsOnly[quesIndex],
+          points: GeneralKnowledgeQuestions().pointsOnly[quesIndex],
         ),
         const SizedBox(
           height: 20,
@@ -164,7 +168,8 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
                 GestureDetector(
                   onTap: () => changeColor(index),
                   child: AnswerBox(
-                    data: Questions().optionsOnly[quesIndex][index],
+                    data: GeneralKnowledgeQuestions().optionsOnly[quesIndex]
+                        [index],
                     color: colors[index],
                   ),
                 ),
