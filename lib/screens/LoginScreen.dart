@@ -10,6 +10,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool obscure = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,7 +76,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.9),
                       hintText: 'Enter your email',
-                      labelText: 'Email',
                       prefixIcon: Icon(Icons.email),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
@@ -84,13 +84,22 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 20.0),
                   TextField(
-                    obscureText: true,
+                    obscureText: obscure,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.9),
                       hintText: 'Enter your password',
-                      labelText: 'Password',
                       prefixIcon: Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              obscure = !obscure;
+                            });
+                          },
+                          icon: Icon(
+                            Icons.remove_red_eye,
+                            size: 20,
+                          )),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
