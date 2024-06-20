@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/ColorsToUse.dart';
+import 'package:manunited_trivia/screens/RegisterScreen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -73,9 +74,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.9),
-                      hintText: 'Enter your username',
-                      labelText: 'Username',
-                      prefixIcon: Icon(Icons.person),
+                      hintText: 'Enter your email',
+                      labelText: 'Email',
+                      prefixIcon: Icon(Icons.email),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -122,7 +123,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   ElevatedButton(
                     onPressed: () {
                       // Placeholder for login functionality
-                      print('Login button pressed');
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => RegisterScreen()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
