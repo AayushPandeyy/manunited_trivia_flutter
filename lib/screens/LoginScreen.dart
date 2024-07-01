@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           Center(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -51,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 10.0),
+                  const SizedBox(height: 10.0),
                   Text(
                     'The Theatre of Quiz',
                     style: TextStyle(
@@ -70,33 +70,33 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 30.0),
+                  const SizedBox(height: 30.0),
                   TextField(
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.9),
                       hintText: 'Enter your email',
-                      prefixIcon: Icon(Icons.email),
+                      prefixIcon: const Icon(Icons.email),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   TextField(
                     obscureText: obscure,
                     decoration: InputDecoration(
                       filled: true,
                       fillColor: Colors.white.withOpacity(0.9),
                       hintText: 'Enter your password',
-                      prefixIcon: Icon(Icons.lock),
+                      prefixIcon: const Icon(Icons.lock),
                       suffixIcon: IconButton(
                           onPressed: () {
                             setState(() {
                               obscure = !obscure;
                             });
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.remove_red_eye,
                             size: 20,
                           )),
@@ -105,23 +105,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0),
                   ElevatedButton(
-                    onPressed: () {
-                      // Placeholder for login functionality
-                      print('Login button pressed');
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           Colors.white, // Manchester United's primary color
-                      padding: EdgeInsets.symmetric(vertical: 15.0),
+                      padding: const EdgeInsets.symmetric(vertical: 15.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       shadowColor: Colors.black,
                       elevation: 5,
                     ),
-                    child: Text(
+                    child: const Text(
                       'Login',
                       style: TextStyle(fontSize: 18.0),
                     ),
@@ -138,14 +135,14 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           Colors.white, // Manchester United's primary color
-                      padding: EdgeInsets.symmetric(vertical: 15.0),
+                      padding: const EdgeInsets.symmetric(vertical: 15.0),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       shadowColor: Colors.black,
                       elevation: 5,
                     ),
-                    child: Text(
+                    child: const Text(
                       'Register',
                       style: TextStyle(fontSize: 18.0),
                     ),

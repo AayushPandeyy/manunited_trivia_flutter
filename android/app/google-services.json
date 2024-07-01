@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1021687426604",
+    "project_id": "manunited-trivia",
+    "storage_bucket": "manunited-trivia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021687426604:android:d756fc33c6a0a77b5b2b89",
+        "android_client_info": {
+          "package_name": "com.astened.manunitedtrivia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpRhL1YbFWCR_yKpEy0CvYLfXdXB-jk_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021687426604:android:af81d5b451415e115b2b89",
+        "android_client_info": {
+          "package_name": "com.example.manunited_trivia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpRhL1YbFWCR_yKpEy0CvYLfXdXB-jk_8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

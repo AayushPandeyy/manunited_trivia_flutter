@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/RouteNames.dart';
 import 'package:manunited_trivia/screens/HomeScreen.dart';
@@ -5,7 +6,9 @@ import 'package:manunited_trivia/screens/LoginScreen.dart';
 import 'package:manunited_trivia/screens/MainDisplay.dart';
 import 'package:manunited_trivia/screens/SplashScreen.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
