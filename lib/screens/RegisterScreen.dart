@@ -1,6 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/ColorsToUse.dart';
+import 'package:manunited_trivia/screens/MainDisplay.dart';
 import 'package:manunited_trivia/services/auth_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,23 +14,28 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
 
   final AuthService authService = AuthService();
 
   void _register(BuildContext context) async {
-    String username = emailController.text.trim();
+    String email = emailController.text.trim();
     String password = passwordController.text.trim();
+    String username = usernameController.text.trim();
 
-    String? token = await authService.register(username, password);
+    String? token = await authService.register(email, username, password);
 
     if (token != null) {
       // Store token in shared preferences for persistent login
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('token', token);
+      print("Registered");
 
       // Navigate to home screen
-      Navigator.pushReplacementNamed(context, '/homeScreen');
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => MainDisplay()));
     } else {
+      print(token);
       // Handle login failure
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Registration failed')),
@@ -88,6 +93,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       hintText: 'Enter your email',
                       labelText: 'Email',
                       prefixIcon: const Icon(Icons.email),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20.0),
+                  TextField(
+                    controller: usernameController,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white.withOpacity(0.9),
+                      hintText: 'Enter your username',
+                      labelText: 'Username',
+                      prefixIcon: const Icon(Icons.person),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
