@@ -11,9 +11,9 @@ class AuthService {
     try {
       var headers = {'Content-Type': 'application/json'};
       var request =
-          http.Request('POST', Uri.parse('192.168.1.6:8080/api/auth/register'));
+          http.Request('POST', Uri.parse('192.168.1.6:8081/api/auth/register'));
       request.body =
-          json.encode({"email": "aayush@gmail.com", "password": "aayush"});
+          json.encode({"email": email, "password": password});
       request.headers.addAll(headers);
 
       http.StreamedResponse response = await request.send();
