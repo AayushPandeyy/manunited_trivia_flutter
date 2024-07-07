@@ -12,6 +12,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  bool isLoading = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController usernameController = TextEditingController();
@@ -19,6 +20,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final AuthService authService = AuthService();
 
   void _register(BuildContext context) async {
+    setState(() {
+      isLoading = true;
+    });
     String email = emailController.text.trim();
     String password = passwordController.text.trim();
     String username = usernameController.text.trim();
@@ -29,14 +33,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
       // Store token in shared preferences for persistent login
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('token', token);
-      print("Registered");
 
       // Navigate to home screen
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => MainDisplay()));
     } else {
-      print(token);
       // Handle login failure
+      setState(() {
+        isLoading = false;
+      });
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Registration failed')),
       );
@@ -151,10 +156,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       shadowColor: Colors.black,
                       elevation: 5,
                     ),
-                    child: const Text(
-                      'Register',
-                      style: TextStyle(fontSize: 18.0),
-                    ),
+                    child: isLoading
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Registering',
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    color: ColorsToUse().unitedRed),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              CircularProgressIndicator(
+                                color: ColorsToUse().unitedRed,
+                              )
+                            ],
+                          )
+                        : Text(
+                            'Register',
+                            style: TextStyle(
+                                fontSize: 18.0, color: ColorsToUse().unitedRed),
+                          ),
                   ),
                 ],
               ),

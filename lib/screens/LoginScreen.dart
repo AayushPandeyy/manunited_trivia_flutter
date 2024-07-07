@@ -17,6 +17,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool isLoading = false;
   bool obscure = true;
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -24,6 +25,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final AuthService authService = AuthService();
 
   void _login(BuildContext context) async {
+    setState(() {
+      isLoading = true;
+    });
     String username = _emailController.text.trim();
     String password = _passwordController.text.trim();
 
@@ -37,8 +41,14 @@ class _LoginScreenState extends State<LoginScreen> {
       // Navigate to home screen
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const MainDisplay()));
+      setState(() {
+        isLoading = false;
+      });
     } else {
       print(token);
+      setState(() {
+        isLoading = false;
+      });
       // Handle login failure
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login failed')),
@@ -144,24 +154,43 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 20.0),
                   ElevatedButton(
-                    onPressed: () {
-                      _login(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor:
-                          Colors.white, // Manchester United's primary color
-                      padding: const EdgeInsets.symmetric(vertical: 15.0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
+                      onPressed: () {
+                        _login(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            Colors.white, // Manchester United's primary color
+                        padding: const EdgeInsets.symmetric(vertical: 15.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        shadowColor: Colors.black,
+                        elevation: 5,
                       ),
-                      shadowColor: Colors.black,
-                      elevation: 5,
-                    ),
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(fontSize: 18.0),
-                    ),
-                  ),
+                      child: isLoading
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Logging In',
+                                  style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: ColorsToUse().unitedRed),
+                                ),
+                                const SizedBox(
+                                  width: 15,
+                                ),
+                                CircularProgressIndicator(
+                                  color: ColorsToUse().unitedRed,
+                                )
+                              ],
+                            )
+                          : Text(
+                              'Login',
+                              style: TextStyle(
+                                  fontSize: 18.0,
+                                  color: ColorsToUse().unitedRed),
+                            )),
                   const SizedBox(
                     height: 20,
                   ),
@@ -180,9 +209,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       shadowColor: Colors.black,
                       elevation: 5,
                     ),
-                    child: const Text(
+                    child: Text(
                       'Register',
-                      style: TextStyle(fontSize: 18.0),
+                      style: TextStyle(
+                          fontSize: 18.0, color: ColorsToUse().unitedRed),
                     ),
                   ),
                 ],
