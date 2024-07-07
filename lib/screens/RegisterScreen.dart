@@ -33,7 +33,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     } else {
       // Handle login failure
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Login failed')),
+        const SnackBar(content: Text('Registration failed')),
       );
     }
   }

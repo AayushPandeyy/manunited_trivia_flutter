@@ -1,9 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/ColorsToUse.dart';
+import 'package:manunited_trivia/screens/HomeScreen.dart';
+import 'package:manunited_trivia/screens/MainDisplay.dart';
 import 'package:manunited_trivia/screens/RegisterScreen.dart';
+import 'package:manunited_trivia/services/auth_service.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -17,7 +21,30 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  final AuthService authService = AuthService();
 
+  void _login(BuildContext context) async {
+    String username = _emailController.text.trim();
+    String password = _passwordController.text.trim();
+
+    String? token = await authService.login(username, password);
+
+    if (token != null) {
+      // Store token in shared preferences for persistent login
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('token', token);
+
+      // Navigate to home screen
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const MainDisplay()));
+    } else {
+      print(token);
+      // Handle login failure
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login failed')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +144,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   const SizedBox(height: 20.0),
                   ElevatedButton(
-                    onPressed: (){},
+                    onPressed: () {
+                      _login(context);
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor:
                           Colors.white, // Manchester United's primary color
@@ -138,7 +167,6 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // Placeholder for login functionality
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => RegisterScreen()));
                     },

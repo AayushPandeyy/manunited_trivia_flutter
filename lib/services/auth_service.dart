@@ -4,20 +4,23 @@ import 'package:http/http.dart' as http;
 import 'package:manunited_trivia/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class AuthService {
-  final String baseUrl = "http://localhost:8080/api/auth"; // Replace with your API base URL
+  final String baseUrl = "http://192.168.1.6:8081/api/auth";
 
   Future<String?> register(String email, String password) async {
     try {
-      final response = await http.post(
-        Uri.parse('$baseUrl/register'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'email': email, 'password': password}),
-      );
+      var headers = {'Content-Type': 'application/json'};
+      var request =
+          http.Request('POST', Uri.parse('192.168.1.6:8080/api/auth/register'));
+      request.body =
+          json.encode({"email": "aayush@gmail.com", "password": "aayush"});
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
+        var res = await http.Response.fromStream(response);
+        final data = jsonDecode(res.body);
         return data['token'];
       } else {
         return null;
@@ -30,15 +33,20 @@ class AuthService {
 
   Future<String?> login(String email, String password) async {
     try {
-      final response = await http.post(
-        Uri.parse('$baseUrl/login'),
-        headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'email': email, 'password': password}),
-      );
+      var headers = {'Content-Type': 'application/json'};
+      var request = http.Request(
+          'POST', Uri.parse('http://192.168.1.6:8081/api/auth/login'));
+      request.body = json.encode({"email": email, "password": password});
+      request.headers.addAll(headers);
+
+      http.StreamedResponse response = await request.send();
 
       if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        return data['token'];
+        var res = await http.Response.fromStream(response);
+        final data = jsonDecode(res.body) as Map<String, dynamic>;
+        final token = data['token'];
+        print("Token = $token");
+        return token;
       } else {
         return null;
       }
