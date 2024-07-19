@@ -1,8 +1,9 @@
 import 'dart:async';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:manunited_trivia/screens/LoginScreen.dart';
+import 'package:manunited_trivia/screens/MainDisplay.dart';
+import 'package:manunited_trivia/services/auth_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -12,14 +13,28 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  
+
+  Future<void> _checkTokenAndNavigate() async {
+    final token = await AuthService().getToken();
+
+    if (token != null) {
+      // If token exists, navigate to Home screen
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) =>const MainDisplay()),
+      );
+    } else {
+      // If token does not exist, navigate to Login screen
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) =>const LoginScreen()),
+      );
+    }
+  }
+
   @override
   void initState() {
     super.initState();
 
-    Timer(Duration(seconds: 4), () {
-      Navigator.of(context).pushNamed('loginScreen');
-    });
+      _checkTokenAndNavigate();
   }
 
   @override
@@ -34,10 +49,10 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/images/logo-2.jpg'),
-            LinearProgressIndicator(
+            const LinearProgressIndicator(
               // color: ,
               backgroundColor: Colors.black,
-              valueColor: new AlwaysStoppedAnimation<Color>(Colors.red),
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
             )
           ],
         )),
