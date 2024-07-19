@@ -5,7 +5,7 @@ import 'package:manunited_trivia/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  final String baseUrl = "http://192.168.1.6:8081/api/auth";
+  final String baseUrl = "http://192.168.1.25:8081/api/auth";
 
   Future<String?> register(
       String email, String username, String password) async {
@@ -44,35 +44,34 @@ class AuthService {
         var res = await http.Response.fromStream(response);
         final data = jsonDecode(res.body) as Map<String, dynamic>;
         final token = data['token'];
-        print("Token = $token");
         return token;
       } else {
         return null;
       }
     } catch (e) {
-      print('Error: $e');
       return null;
     }
   }
 
-  Future<User?> getUser(String token) async {
-    try {
-      final response = await http.get(
-        Uri.parse('$baseUrl/user'),
-        headers: {
-          'Content-Type': 'application/json',
-          'x-auth-token': token,
-        },
-      );
+  Future<User?> getUser() async {
+    final String? token = await getToken();
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        return User.fromJson(data);
-      } else {
-        return null;
-      }
-    } catch (e) {
-      print('Error: $e');
+    if (token == null) {
+      return null;
+    }
+
+    final response = await http.get(
+      Uri.parse('$baseUrl/user'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> userData = json.decode(response.body);
+      return User.fromJson(userData);
+    } else {
       return null;
     }
   }
@@ -80,5 +79,10 @@ class AuthService {
   Future<void> logout() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove('token');
+  }
+
+  Future<String?> getToken() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString('token');
   }
 }
