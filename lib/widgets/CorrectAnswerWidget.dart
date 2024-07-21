@@ -19,7 +19,6 @@ class CorrectAnswer extends StatefulWidget {
 }
 
 class _CorrectAnswerState extends State<CorrectAnswer> {
-
   int selectedAnswer = 0;
 
   int points = 0;
@@ -27,7 +26,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
   static int quesIndex = 0;
   int correctAnswerIndex =
       GeneralKnowledgeQuestions().correctAnswerIndexes[quesIndex];
-  int size = GeneralKnowledgeQuestions().questionsOnly.length;
+  int size = 5;
 
   final CarouselController _controller = CarouselController();
   void reset() {

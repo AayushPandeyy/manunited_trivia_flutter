@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
+import 'package:manunited_trivia/models/User.dart';
 import 'package:manunited_trivia/screens/QuizScreen.dart';
+import 'package:manunited_trivia/services/auth_service.dart';
 import 'package:pie_chart/pie_chart.dart';
 
 class ResultScreen extends StatefulWidget {
@@ -21,6 +23,19 @@ class ResultScreen extends StatefulWidget {
 }
 
 class _ResultScreenState extends State<ResultScreen> {
+  User? user;
+  final AuthService authService = AuthService();
+
+  
+  void _updatePoints(int points) async {
+    try {
+      await authService.updatePoints(points); 
+      print('Points updated successfully');
+    } catch (error) {
+      print('Failed to update points: $error');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final dataMap = <String, double>{
@@ -222,33 +237,11 @@ class _ResultScreenState extends State<ResultScreen> {
                       border: Border.all(color: Colors.black, width: 2)),
                   child: TextButton(
                     onPressed: () {
-                    //   Navigator.of(context).push(MaterialPageRoute(
-                    //       builder: (context) => const QuizScreen()));
-                    // },
+                      _updatePoints(widget.totalPoints );
+                      Navigator.of(context).pushReplacementNamed('homeScreen');
                     },
                     child: const Text(
-                      "Retake Quiz",
-                      style: TextStyle(
-                          fontFamily: "Gabarito",
-                          fontSize: 18,
-                          color: Colors.black),
-                    ),
-                  ),
-                ),
-                Container(
-                  // height: 50,
-                  // width: 50,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: Colors.black, width: 2)),
-                  child: TextButton(
-                    onPressed: () {
-                      // Navigator.of(context).push(MaterialPageRoute(
-                      //     builder: (context) => const QuizScreen()));
-                    },
-                    child: const Text(
-                      "Take Another Quiz",
+                      "Okay",
                       style: TextStyle(
                           fontFamily: "Gabarito",
                           fontSize: 18,

@@ -53,6 +53,25 @@ class AuthService {
     }
   }
 
+  Future<void> updatePoints(int points) async {
+    
+    
+    
+    final String? token = await getToken();
+    final response = await http.post(
+      Uri.parse('$baseUrl/user/points'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode({'points': points}),
+    );
+
+    if (response.statusCode != 200) {
+      throw Exception('Failed to update points');
+    }
+  }
+
   Future<User?> getUser() async {
     final String? token = await getToken();
 
@@ -70,10 +89,13 @@ class AuthService {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> userData = json.decode(response.body);
-      return User.fromJson(userData);
+      final user = User.fromJson(userData);
+      return user;
     } else {
       return null;
     }
+
+    
   }
 
   Future<void> logout() async {
