@@ -4,11 +4,21 @@ import 'package:manunited_trivia/constants/ColorsToUse.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
 import 'package:manunited_trivia/screens/QuizScreen.dart';
 
-class QuizBox extends StatelessWidget {
+class QuizBox extends StatefulWidget {
   final String title;
   final String number;
-  const QuizBox({super.key, required this.title, required this.number});
+  final List<Map<String, dynamic>> questions;
+  const QuizBox(
+      {super.key,
+      required this.title,
+      required this.number,
+      required this.questions});
 
+  @override
+  State<QuizBox> createState() => _QuizBoxState();
+}
+
+class _QuizBoxState extends State<QuizBox> {
   @override
   Widget build(BuildContext context) {
     ScreenSize().init(context: context);
@@ -17,7 +27,7 @@ class QuizBox extends StatelessWidget {
       height: 0.2 * ScreenSize.screenHeight,
       width: 0.9 * ScreenSize.screenWidth,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(20)),
+          borderRadius: const BorderRadius.all(Radius.circular(20)),
           color: ColorsToUse().unitedRed),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -37,7 +47,7 @@ class QuizBox extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       AutoSizeText(
-                        title,
+                        widget.title,
                         style: const TextStyle(
                           fontFamily: "Gabarito",
                           fontWeight: FontWeight.bold,
@@ -48,7 +58,7 @@ class QuizBox extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       AutoSizeText(
-                        "$number questions",
+                        "${widget.number} questions",
                         style: const TextStyle(
                           fontFamily: "Gabarito",
                           // fontSize: 20,
@@ -68,7 +78,10 @@ class QuizBox extends StatelessWidget {
                   child: TextButton(
                     onPressed: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const QuizScreen()));
+                          builder: (context) => QuizScreen(
+                                quizTitle: widget.title,
+                                questions: widget.questions,
+                              )));
                     },
                     child: const Text(
                       "Join the quiz",

@@ -3,7 +3,9 @@ import 'package:manunited_trivia/constants/ColorsToUse.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
 
 class PointsBox extends StatelessWidget {
-  const PointsBox({super.key});
+  final int points;
+  final int level;
+  const PointsBox({super.key, required this.points, required this.level});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +34,7 @@ class PointsBox extends StatelessWidget {
                           color: ColorsToUse().unitedRed)),
                   const SizedBox(width: 4.0),
                   Text(
-                    '22,352',
+                    points.toString(),
                     style: TextStyle(
                         color: ColorsToUse().unitedRed,
                         fontSize: 30,
@@ -53,13 +55,13 @@ class PointsBox extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Your Rank',
+                  Text('Level',
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: ColorsToUse().unitedRed)),
                   const SizedBox(width: 4.0),
                   Text(
-                    '135',
+                    level.toString(),
                     style: TextStyle(
                         color: ColorsToUse().unitedRed,
                         fontSize: 30,

@@ -11,6 +11,7 @@ import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class CorrectAnswer extends StatefulWidget {
+  // final List<Map<String, dynamic>> questions;
   const CorrectAnswer({super.key});
 
   @override
@@ -18,7 +19,6 @@ class CorrectAnswer extends StatefulWidget {
 }
 
 class _CorrectAnswerState extends State<CorrectAnswer> {
-  static Random random = Random();
 
   int selectedAnswer = 0;
 

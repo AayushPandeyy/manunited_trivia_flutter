@@ -4,7 +4,9 @@ import 'package:manunited_trivia/constants/ScreenSize.dart';
 import 'package:manunited_trivia/widgets/CorrectAnswerWidget.dart';
 
 class QuizScreen extends StatefulWidget {
-  const QuizScreen({super.key});
+  final String quizTitle;
+  final List<Map<String, dynamic>> questions;
+  const QuizScreen({super.key, required this.quizTitle, required this.questions});
 
   @override
   State<QuizScreen> createState() => _QuizScreenState();
@@ -35,13 +37,13 @@ class _QuizScreenState extends State<QuizScreen> {
                   ),
                   height: 0.12 * ScreenSize.screenHeight,
                   width: ScreenSize.screenWidth * 0.3,
-                  child: const Center(
+                  child: Center(
                     child: AutoSizeText(
-                      "Historical Quiz",
-                      style: TextStyle(
+                      widget.quizTitle,
+                      style: const TextStyle(
                           fontFamily: "AldotheApache", color: Colors.white),
                       maxFontSize: 30,
-                      minFontSize: 20,
+                      minFontSize: 10,
                       maxLines: 1,
                     ),
                   )),

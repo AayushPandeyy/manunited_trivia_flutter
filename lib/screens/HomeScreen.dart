@@ -94,7 +94,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       // const SizedBox(
                       //   height: 20,
                       // ),
-                      const PointsBox(),
+                      PointsBox(
+                        points: user!.points,
+                        level: user!.level,
+                      ),
                       // const SizedBox(
                       //   height: 20,
                       // ),

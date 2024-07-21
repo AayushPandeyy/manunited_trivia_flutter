@@ -222,8 +222,9 @@ class _ResultScreenState extends State<ResultScreen> {
                       border: Border.all(color: Colors.black, width: 2)),
                   child: TextButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const QuizScreen()));
+                    //   Navigator.of(context).push(MaterialPageRoute(
+                    //       builder: (context) => const QuizScreen()));
+                    // },
                     },
                     child: const Text(
                       "Retake Quiz",
@@ -243,8 +244,8 @@ class _ResultScreenState extends State<ResultScreen> {
                       border: Border.all(color: Colors.black, width: 2)),
                   child: TextButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const QuizScreen()));
+                      // Navigator.of(context).push(MaterialPageRoute(
+                      //     builder: (context) => const QuizScreen()));
                     },
                     child: const Text(
                       "Take Another Quiz",
