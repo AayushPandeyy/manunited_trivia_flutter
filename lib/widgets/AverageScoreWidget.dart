@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
 
 class AverageScoreWidget extends StatelessWidget {
-  const AverageScoreWidget({super.key});
+  final int data;
+  const AverageScoreWidget({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +13,10 @@ class AverageScoreWidget extends StatelessWidget {
       width: ScreenSize.screenWidth * 0.9,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20), color: Colors.black),
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Icon(
@@ -48,8 +49,8 @@ class AverageScoreWidget extends StatelessWidget {
             ],
           ),
           Text(
-            "75%",
-            style: TextStyle(
+            "$data %",
+            style: const TextStyle(
                 fontFamily: "AldotheApache",
                 fontSize: 35,
                 color: Colors.white,

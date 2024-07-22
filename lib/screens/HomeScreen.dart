@@ -135,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       // const SizedBox(
                       //   height: 5,
                       // ),
-                      const AverageScoreWidget(),
+                       AverageScoreWidget(data: user!.averageScore,),
                       // const SizedBox(
                       //   height: 10,
                       // ),

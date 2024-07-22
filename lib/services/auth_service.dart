@@ -5,7 +5,7 @@ import 'package:manunited_trivia/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  final String baseUrl = "http://192.168.1.25:8081/api/auth";
+  final String baseUrl = "http://192.168.1.34:8081/api/auth";
 
   Future<String?> register(
       String email, String username, String password) async {
@@ -53,22 +53,19 @@ class AuthService {
     }
   }
 
-  Future<void> updatePoints(int points) async {
-    
-    
-    
+  Future<void> updateStats(int total,int correct,int incorrect,int points) async {
     final String? token = await getToken();
     final response = await http.post(
-      Uri.parse('$baseUrl/user/points'),
+      Uri.parse('$baseUrl/user/stats'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
       },
-      body: jsonEncode({'points': points}),
+      body: jsonEncode({'points': points,'questionsAttempted':token,'correctAnswer':correct,'incorrectAnswer':incorrect}),
     );
 
     if (response.statusCode != 200) {
-      throw Exception('Failed to update points');
+      throw Exception('Failed to update stats');
     }
   }
 
@@ -94,8 +91,6 @@ class AuthService {
     } else {
       return null;
     }
-
-    
   }
 
   Future<void> logout() async {

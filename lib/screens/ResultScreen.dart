@@ -26,10 +26,9 @@ class _ResultScreenState extends State<ResultScreen> {
   User? user;
   final AuthService authService = AuthService();
 
-  
-  void _updatePoints(int points) async {
+  void _updateStats(int total, int correct, int incorrect, int points) async {
     try {
-      await authService.updatePoints(points); 
+      await authService.updateStats(total, correct, incorrect, points);
       print('Points updated successfully');
     } catch (error) {
       print('Failed to update points: $error');
@@ -237,8 +236,9 @@ class _ResultScreenState extends State<ResultScreen> {
                       border: Border.all(color: Colors.black, width: 2)),
                   child: TextButton(
                     onPressed: () {
-                      _updatePoints(widget.totalPoints );
-                      Navigator.of(context).pushReplacementNamed('homeScreen');
+                      _updateStats(widget.totalQues, widget.correctAns,
+                          widget.incorrectAns, widget.totalPoints);
+                      Navigator.of(context).pushReplacementNamed('mainDisplay');
                     },
                     child: const Text(
                       "Okay",
