@@ -40,15 +40,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    super.initState();
     _getUser();
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     ScreenSize().init(context: context);
     return isLoading
-        ? Center(
+        ? const Center(
             child: CircularProgressIndicator(),
           )
         : SafeArea(

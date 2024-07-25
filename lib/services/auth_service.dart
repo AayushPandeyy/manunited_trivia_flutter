@@ -64,7 +64,7 @@ class AuthService {
       },
       body: jsonEncode({
         'points': points,
-        'questionsAttempted': token,
+        'questionsAttempted': total,
         'correctAnswer': correct,
         'incorrectAnswer': incorrect
       }),

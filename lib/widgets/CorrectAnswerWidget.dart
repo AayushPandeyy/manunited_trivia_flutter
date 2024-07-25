@@ -34,6 +34,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
       points = 0;
       incorrectAns = 0;
       quesIndex = 0;
+      
     });
   }
 
