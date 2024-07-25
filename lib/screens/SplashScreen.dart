@@ -13,20 +13,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final AuthService authService = AuthService();
 
-  Future<void> _checkTokenAndNavigate() async {
-    final token = await AuthService().getToken();
-
-    if (token != null) {
-      // If token exists, navigate to Home screen
+  Future<void> _verifyToken() async {
+    try {
+      await authService.verify_token();
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) =>const MainDisplay()),
-      );
-    } else {
-      // If token does not exist, navigate to Login screen
+          MaterialPageRoute(builder: (context) => MainDisplay()));
+    } catch (error) {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) =>const LoginScreen()),
-      );
+          MaterialPageRoute(builder: (context) => LoginScreen()));
     }
   }
 
@@ -34,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
 
-      _checkTokenAndNavigate();
+    _verifyToken();
   }
 
   @override

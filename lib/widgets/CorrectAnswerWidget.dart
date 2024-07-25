@@ -117,7 +117,6 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
                               correctAns: size - incorrectAns,
                               totalPoints: points,
                             )));
-                      reset();
               }
             });
           },
@@ -148,7 +147,6 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
               enlargeCenterPage: true,
               enlargeFactor: 0.5,
               scrollDirection: Axis.horizontal,
-
             )),
         const SizedBox(
           height: 20,

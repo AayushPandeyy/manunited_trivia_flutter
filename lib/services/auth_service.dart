@@ -5,7 +5,7 @@ import 'package:manunited_trivia/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  final String baseUrl = "http://192.168.1.34:8081/api/auth";
+  final String baseUrl = "http://192.168.1.45:8081/api/auth";
 
   Future<String?> register(
       String email, String username, String password) async {
@@ -53,7 +53,8 @@ class AuthService {
     }
   }
 
-  Future<void> updateStats(int total,int correct,int incorrect,int points) async {
+  Future<void> updateStats(
+      int total, int correct, int incorrect, int points) async {
     final String? token = await getToken();
     final response = await http.post(
       Uri.parse('$baseUrl/user/stats'),
@@ -61,7 +62,12 @@ class AuthService {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
       },
-      body: jsonEncode({'points': points,'questionsAttempted':token,'correctAnswer':correct,'incorrectAnswer':incorrect}),
+      body: jsonEncode({
+        'points': points,
+        'questionsAttempted': token,
+        'correctAnswer': correct,
+        'incorrectAnswer': incorrect
+      }),
     );
 
     if (response.statusCode != 200) {
@@ -90,6 +96,27 @@ class AuthService {
       return user;
     } else {
       return null;
+    }
+  }
+
+  Future<Map<String, dynamic>> verify_token() async {
+    final String? token = await getToken();
+    if (token == null) {
+      throw Exception("Token not found");
+    }
+
+    final response = await http.get(
+      Uri.parse('$baseUrl/verify_token'),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+        'Authorization': 'Bearer $token',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      return jsonDecode(response.body);
+    } else {
+      throw Exception('Failed to verify token');
     }
   }
 
