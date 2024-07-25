@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/ColorsToUse.dart';
+import 'package:manunited_trivia/constants/ScreenSize.dart';
 import 'package:manunited_trivia/screens/HomeScreen.dart';
 import 'package:manunited_trivia/screens/ProfileScreen.dart';
 import 'package:manunited_trivia/screens/SettingsScreen.dart';
@@ -18,7 +19,8 @@ class _MainDisplayState extends State<MainDisplay> {
 
   @override
   Widget build(BuildContext context) {
-    void _onItemTapped(int index) {
+    ScreenSize().init(context: context);
+    void onItemTapped(int index) {
       setState(() {
         _selectedIndex = index;
       });
@@ -34,31 +36,34 @@ class _MainDisplayState extends State<MainDisplay> {
           ProfileScreen()
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.black,
-        unselectedItemColor: Colors.white,
-        selectedItemColor: ColorsToUse().unitedRed,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(CupertinoIcons.chart_bar),
-            label: 'Stats',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_rounded),
-            label: 'Profile',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        type: BottomNavigationBarType.fixed,
+      bottomNavigationBar: SizedBox(
+        height: 0.07 * ScreenSize.screenHeight,
+        child: BottomNavigationBar(
+          backgroundColor: Colors.black,
+          unselectedItemColor: Colors.white,
+          selectedItemColor: ColorsToUse().unitedRed,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.chart_bar),
+              label: 'Stats',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: 'Settings',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.account_circle_rounded),
+              label: 'Profile',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          onTap: onItemTapped,
+          type: BottomNavigationBarType.fixed,
+        ),
       ),
     );
   }

@@ -56,6 +56,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
           onConfirmBtnTap: () {
             Navigator.of(context).pop();
             setState(() {
+              incorrectAns = incorrectAns + 1;
               if (quesIndex < size - 1) {
                 quesIndex = quesIndex + 1;
                 correctAnswerIndex =
@@ -78,12 +79,10 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
                               correctAns: size - incorrectAns,
                               totalPoints: points,
                             )));
-                reset();
               }
             });
           },
         );
-        incorrectAns++;
       } else {
         colors[correctAnswerIndex] = Colors.green;
         QuickAlert.show(
@@ -107,7 +106,6 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
                 ];
                 _controller.nextPage();
               } else {
-                Navigator.pop(context);
                 Navigator.push(
                     context,
                     MaterialPageRoute(

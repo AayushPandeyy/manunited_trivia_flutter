@@ -17,12 +17,14 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _verifyToken() async {
     try {
-      await authService.verify_token();
+      await authService.verifyToken();
+      await Future.delayed(const Duration(seconds: 2));
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => MainDisplay()));
+          MaterialPageRoute(builder: (context) => const MainDisplay()));
     } catch (error) {
+      print(error);
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => LoginScreen()));
+          MaterialPageRoute(builder: (context) => const LoginScreen()));
     }
   }
 

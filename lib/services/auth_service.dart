@@ -99,14 +99,14 @@ class AuthService {
     }
   }
 
-  Future<Map<String, dynamic>> verify_token() async {
+  Future<Map<String, dynamic>> verifyToken() async {
     final String? token = await getToken();
     if (token == null) {
       throw Exception("Token not found");
     }
 
     final response = await http.get(
-      Uri.parse('$baseUrl/verify_token'),
+      Uri.parse('$baseUrl/verify-token'),
       headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
