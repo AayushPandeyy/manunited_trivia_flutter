@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:manunited_trivia/constants/ScreenSize.dart';
+import 'package:manunited_trivia/utilities/Utilities.dart';
 
 class AverageScoreWidget extends StatelessWidget {
-  final int data;
+  final double data;
   const AverageScoreWidget({super.key, required this.data});
 
   @override
@@ -49,7 +50,7 @@ class AverageScoreWidget extends StatelessWidget {
             ],
           ),
           Text(
-            "$data %",
+            Utilities().truncateToDecimalPlaces(data, 2).toString() + "%",
             style: const TextStyle(
                 fontFamily: "AldotheApache",
                 fontSize: 35,

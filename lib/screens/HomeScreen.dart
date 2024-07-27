@@ -8,8 +8,6 @@ import 'package:manunited_trivia/services/auth_service.dart';
 import 'package:manunited_trivia/widgets/AchievementsWidget.dart';
 import 'package:manunited_trivia/widgets/AverageScoreWidget.dart';
 import 'package:manunited_trivia/widgets/PointsWidget.dart';
-import 'package:manunited_trivia/widgets/QuizBox.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -42,6 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     _getUser();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _getUser();
   }
 
   @override

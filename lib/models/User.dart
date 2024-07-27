@@ -5,7 +5,7 @@ class User {
     final String username;
     final int points;
     final int level;
-    final int averageScore;
+    final double averageScore;
     final int totalQuestionsAttempted;
     final int allTimeCorrectAnswers;
     final int allTimeIncorrectAnswers;

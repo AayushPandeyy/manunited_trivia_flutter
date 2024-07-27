@@ -119,7 +119,7 @@ class _StatsScreenState extends State<StatsScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                     AverageScoreWidget(data: user!.averageScore,),
+                     AverageScoreWidget(data: user!.averageScore.toDouble(),),
                     const SizedBox(
                       height: 15,
                     ),

@@ -5,7 +5,7 @@ import 'package:manunited_trivia/models/User.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
-  final String baseUrl = "http://192.168.1.45:8081/api/auth";
+  final String baseUrl = "http://192.168.1.50:8081/api/auth";
 
   Future<String?> register(
       String email, String username, String password) async {
