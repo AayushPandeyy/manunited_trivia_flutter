@@ -8,6 +8,7 @@ import 'package:manunited_trivia/services/auth_service.dart';
 import 'package:manunited_trivia/widgets/AchievementsWidget.dart';
 import 'package:manunited_trivia/widgets/AverageScoreWidget.dart';
 import 'package:manunited_trivia/widgets/PointsWidget.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -52,8 +53,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     ScreenSize().init(context: context);
     return isLoading
-        ? const Center(
-            child: CircularProgressIndicator(),
+        ? Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                
+                LoadingAnimationWidget.stretchedDots(
+                  color: ColorsToUse().unitedRed,
+                  size: 100,
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                const Text(
+                  "Loading...",
+                  style: TextStyle(fontFamily: "AldoTheApache", fontSize: 20),
+                )
+              ],
+            ),
           )
         : SafeArea(
             child: Scaffold(

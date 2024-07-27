@@ -12,6 +12,7 @@ import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 class CorrectAnswer extends StatefulWidget {
   // final List<Map<String, dynamic>> questions;
+
   const CorrectAnswer({super.key});
 
   @override
@@ -19,11 +20,18 @@ class CorrectAnswer extends StatefulWidget {
 }
 
 class _CorrectAnswerState extends State<CorrectAnswer> {
+  @override
+  void initState() {
+    reset();
+    super.initState();
+  }
+
   int selectedAnswer = 0;
 
   int points = 0;
   int incorrectAns = 0;
   static int quesIndex = 0;
+  int answeredQuestions = 0;
   int correctAnswerIndex =
       GeneralKnowledgeQuestions().correctAnswerIndexes[quesIndex];
   int size = 5;
@@ -34,7 +42,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
       points = 0;
       incorrectAns = 0;
       quesIndex = 0;
-      
+      answeredQuestions = 0;
     });
   }
 
@@ -44,6 +52,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
 
   void changeColor(int index) {
     setState(() {
+      answeredQuestions++;
       selectedAnswer = index;
       if (index != correctAnswerIndex) {
         colors[correctAnswerIndex] = Colors.green;
@@ -70,7 +79,7 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
                 ];
                 _controller.nextPage();
               } else {
-                Navigator.pop(context);
+                Navigator.of(context).pop();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -107,13 +116,14 @@ class _CorrectAnswerState extends State<CorrectAnswer> {
                 ];
                 _controller.nextPage();
               } else {
+                Navigator.of(context).pop();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => ResultScreen(
-                              totalQues: size,
+                              totalQues: answeredQuestions,
                               incorrectAns: incorrectAns,
-                              correctAns: size - incorrectAns,
+                              correctAns: answeredQuestions - incorrectAns,
                               totalPoints: points,
                             )));
               }
