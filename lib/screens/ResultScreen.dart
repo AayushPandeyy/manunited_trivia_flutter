@@ -235,7 +235,6 @@ class _ResultScreenState extends State<ResultScreen> {
                       border: Border.all(color: Colors.black, width: 2)),
                   child: TextButton(
                     onPressed: () {
-                      print(widget.totalQues);
                       _updateStats(widget.totalQues, widget.correctAns,
                           widget.incorrectAns, widget.totalPoints);
                       Navigator.of(context).pushReplacementNamed('mainDisplay');

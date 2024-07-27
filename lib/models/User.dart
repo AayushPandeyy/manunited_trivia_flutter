@@ -4,7 +4,6 @@ class User {
   final String email;
   final String username;
   final int points;
-  final double level;
   final double averageScore;
   final int totalQuestionsAttempted;
   final int allTimeCorrectAnswers;
@@ -15,7 +14,6 @@ class User {
     required this.email,
     required this.username,
     required this.points,
-    required this.level,
     required this.averageScore,
     required this.totalQuestionsAttempted,
     required this.allTimeCorrectAnswers,
@@ -28,7 +26,6 @@ class User {
         username: json['username'],
         email: json['email'],
         points: json['points'],
-        level: json['level'],
         averageScore: json['averageScore'],
         totalQuestionsAttempted: json['totalQuestionsAttempted'],
         allTimeCorrectAnswers: json['allTimeCorrectAnswers'],
