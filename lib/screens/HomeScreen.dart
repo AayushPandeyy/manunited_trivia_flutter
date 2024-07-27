@@ -18,9 +18,29 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final int _currentTime = DateTime.now().toLocal().hour;
+  String? titleText;
   bool isLoading = false;
   User? user;
   final AuthService authService = AuthService();
+
+  void setTitle() {
+    if (_currentTime <= 12) {
+      setState(() {
+        titleText = "Good Morning";
+      });
+    } else if (_currentTime > 12 && _currentTime <= 5) {
+      setState(() {
+        titleText = "Good Afternoon";
+      });
+    } else {
+      setState(() {
+        titleText = "Good Evening";
+      });
+    }
+
+    print(titleText);
+  }
 
   Future<void> _getUser() async {
     setState(() {
@@ -39,8 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    _getUser();
     super.initState();
+    _getUser();
+    setTitle();
   }
 
   @override
@@ -98,9 +119,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: Column(
                                 // mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'Good Morning',
-                                    style: TextStyle(
+                                  Text(
+                                    titleText!,
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontSize: 20,
                                         fontFamily: "Gabarito"),
@@ -121,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           // ),
                           PointsBox(
                             points: user!.points,
-                            level: (user!.points) ~/ 100,
+                            level: ((user!.points) ~/ 500) + 1,
                           ),
                           // const SizedBox(
                           //   height: 20,
