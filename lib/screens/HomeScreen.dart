@@ -57,7 +57,6 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                
                 LoadingAnimationWidget.stretchedDots(
                   color: ColorsToUse().unitedRed,
                   size: 100,
@@ -118,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         // ),
                         PointsBox(
                           points: user!.points,
-                          level: user!.level,
+                          level: user!.level.toInt(),
                         ),
                         // const SizedBox(
                         //   height: 20,
